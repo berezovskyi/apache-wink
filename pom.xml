@@ -101,6 +101,17 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>aggregate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
 
         <pluginManagement>
@@ -246,10 +257,39 @@
                       <tagBase>https://svn.apache.org/repos/asf/incubator/wink/tags</tagBase>
                       <preparationGoals>clean install</preparationGoals>
                       <autoVersionSubmodules>true</autoVersionSubmodules>
-                      <!-- Run  CIBuild profile -->
-                      <releaseProfiles>CIBuild</releaseProfiles>
                     </configuration>
                 </plugin>
+                <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <configuration>
+                            <excludePackageNames>${javadoc.exclude.patterns}</excludePackageNames>
+                            <maxmemory>1024m</maxmemory>
+                            <minmemory>512m</minmemory>
+                            <groups>
+                                <group>
+                                    <title>Common Packages</title>
+                                    <packages>org.apache.wink.common*</packages>
+                                </group>
+                                <group>
+                                    <title>Server Packages</title>
+                                    <packages>org.apache.wink.server*</packages>
+                                </group>
+                                <group>
+                                    <title>Client Packages</title>
+                                    <packages>org.apache.wink.client*</packages>
+                                </group>
+                                <group>
+                                    <title>Spring Support Packages</title>
+                                    <packages>org.apache.wink.spring*</packages>
+                                </group>
+                                <group>
+                                    <title>WebDAV Packages</title>
+                                    <packages>org.apache.wink.webdav*</packages>
+                                </group>
+                            </groups>
+                        </configuration>
+                    </plugin>
             </plugins>
         </pluginManagement>
     </build>
@@ -467,46 +507,6 @@
                                 <goals>
                                     <goal>jar</goal>
                                 </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-javadoc-plugin</artifactId>
-                        <!--additionalJOption>-J-Xmx512m</additionalJOption-->
-                        <configuration>
-                            <excludePackageNames>${javadoc.exclude.patterns}</excludePackageNames>
-                            <maxmemory>1024m</maxmemory>
-                            <minmemory>512m</minmemory>
-                            <groups>
-                                <group>
-                                    <title>Common Packages</title>
-                                    <packages>org.apache.wink.common*</packages>
-                                </group>
-                                <group>
-                                    <title>Server Packages</title>
-                                    <packages>org.apache.wink.server*</packages>
-                                </group>
-                                <group>
-                                    <title>Client Packages</title>
-                                    <packages>org.apache.wink.client*</packages>
-                                </group>
-                                <group>
-                                    <title>Spring Support Packages</title>
-                                    <packages>org.apache.wink.spring*</packages>
-                                </group>
-                                <group>
-                                    <title>WebDAV Packages</title>
-                                    <packages>org.apache.wink.webdav*</packages>
-                                </group>
-                            </groups>
-                        </configuration>
-                        <executions>
-                            <execution>
-                                <goals>
-                                    <goal>aggregate</goal>
-                                </goals>
-                                <phase>install</phase>
                             </execution>
                         </executions>
                     </plugin>
