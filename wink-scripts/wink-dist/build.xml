@@ -41,7 +41,6 @@
 	<property name="dist.root" value="${dist}/apache-wink-${project.version}" />
 	<property name="dist.docs" value="${dist.root}/docs" />
 	<property name="dist.docs.api" value="${dist.docs}/api" />
-	<property name="dist.licences" value="${dist.root}/licences" />
 	<property name="dist.dist" value="${dist.root}/dist" />
 	<property name="dist.components" value="${dist.dist}" />
 	<property name="dist.examples" value="${dist.root}/examples" />
@@ -85,17 +84,6 @@
 				<exclude name="**/javadoc.*" />
 				<exclude name="**/options" />
 				<exclude name="**/packages" />
-			</fileset>
-		</copy>
-	</target>
-	
-	<!-- Creates licences folder with all 3-rd party licences -->
-	<target name="create.licences" depends="init">
-		<echo>Copying Licences ...</echo>
-		<mkdir dir="${dist.licences}" />
-		<copy todir="${dist.licences}">
-			<fileset dir="${basedir}/../../src/licences">
-				<include name="**/*.txt" />
 			</fileset>
 		</copy>
 	</target>
@@ -215,6 +203,7 @@
 			<property name="aggregator.target" value="${dist.components}" />
 			<property name="aggregator.includes" value="*-${project.version}.jar" />
 			<property name="aggregator.jar.name" value="${dist.dist}/${wink.main.jar.name}" />
+			<property name="aggregator.title" value="Apache Wink" />
 		</ant>
 	</target>
 
@@ -227,6 +216,7 @@
 			<property name="aggregator.target" value="${dist.components}" />
 			<property name="aggregator.includes" value="*-${project.version}-sources.jar" />
 			<property name="aggregator.jar.name" value="${dist.dist}/wink-${project.version}-sources.jar" />
+			<property name="aggregator.title" value="Apache Wink Sources" />
 		</ant>
 	</target>
 
@@ -242,9 +232,15 @@
 				<attribute name="Created-By" value="Wink Distribution Script" />
 				<attribute name="Built-By" value="${user.name}" />
 				<attribute name="Build-Jdk" value="${java.version}" />
-				<attribute name="Implementation-Title" value="${title.name}" />
+				<attribute name="Implementation-Title" value="${aggregator.title}" />
 				<attribute name="Implementation-Version" value="${project.version}" />
 				<attribute name="Implementation-Vendor-Id" value="${group.id}" />
+				<attribute name="Implementation-Vendor" value="The Apache Software Foundation" />
+				<attribute name="Specification-Title" value="${aggregator.title}" />
+				<attribute name="Specification-Version" value="${project.version}" />
+				<attribute name="Specification-Vendor" value="The Apache Software Foundation" />
+				<attribute name="X-Compile-Source-JDK" value="${maven.compile.source}" />
+				<attribute name="X-COmpile-Target-JDK" value="${maven.compile.target}" />
 			</manifest>
 		</jar>
 		<delete dir="${tmp.unzip}" />
@@ -257,7 +253,7 @@
 			<fileset dir="${project.root}/wink-examples">
 				<include name="**/build.xml" />
 				<exclude name="**/GoogleServices-client/**" />
-			    <exclude name="**/target/**" />
+				<exclude name="**/target/**" />
 			</fileset>
 			<filterset>
 				<filter token="SDK_JAR_NAME" value="${wink.main.jar.name}" />
@@ -271,13 +267,13 @@
 				<include name="**/readme.txt" />
 				<include name="**/src/main/**" />
 				<exclude name="**/GoogleServices-client/**" />
-                <exclude name="**/target/**" />
+				<exclude name="**/target/**" />
 			</fileset>
 		</copy>
 	</target>
 
 	<!-- Done building distribution -->
-	<target name="dist" depends="create.javadoc, create.licences, create.dist.components, create.dist.lib, create.dist.root.docs, create.dist.main.jar, create.dist.main.sources.jar, create.examples">
+	<target name="dist" depends="create.javadoc, create.dist.components, create.dist.lib, create.dist.root.docs, create.dist.main.jar, create.dist.main.sources.jar, create.examples">
 	</target>
 
 </project>
