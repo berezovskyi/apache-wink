@@ -130,11 +130,9 @@ public class RequestMethodsTest extends TestCase {
          * get the time zone for the server
          */
         GetMethod getMethod = new GetMethod(getBaseURI() + "/context/request/timezone");
-        String serverTimeZone = null;
         try {
             client.executeMethod(getMethod);
             assertEquals(200, getMethod.getStatusCode());
-            serverTimeZone = getMethod.getResponseBodyAsString();
         } finally {
             getMethod.releaseConnection();
         }
@@ -142,8 +140,9 @@ public class RequestMethodsTest extends TestCase {
         PutMethod putMethod = new PutMethod(getBaseURI() + "/context/request/date");
         Date d2 = new Date(System.currentTimeMillis() - 120000);
         Date d = new Date(System.currentTimeMillis() - 60000);
-        DateFormat dateFormat = DateFormat.getDateTimeInstance();
-        dateFormat.setTimeZone(TimeZone.getTimeZone(serverTimeZone));
+        DateFormat dateFormat = new SimpleDateFormat(
+                                                     "EEE, dd MMM yyyy HH:mm:ss zzz",
+                                                     Locale.ENGLISH); // DateFormat.getDateTimeInstance();
         String date = dateFormat.format(d);
         putMethod.setRequestEntity(new StringRequestEntity(date, "text/string", "UTF-8"));
         try {
@@ -180,11 +179,9 @@ public class RequestMethodsTest extends TestCase {
              */
             client.executeMethod(getMethod);
             assertEquals(200, getMethod.getStatusCode());
-            rfc1123Format.setTimeZone(TimeZone.getTimeZone(serverTimeZone));
+            rfc1123Format.setTimeZone(TimeZone.getTimeZone("GMT"));
             assertEquals("the date: " + rfc1123Format.format(d), getMethod
                 .getResponseBodyAsString());
-            rfc1123Format.setTimeZone(TimeZone.getDefault());
-
             rfc1123Format.setTimeZone(TimeZone.getTimeZone("GMT"));
             assertEquals(rfc1123Format.format(d), getMethod.getResponseHeader("Last-Modified")
                 .getValue());
@@ -219,11 +216,9 @@ public class RequestMethodsTest extends TestCase {
              */
             client.executeMethod(getMethod);
             assertEquals(200, getMethod.getStatusCode());
-            rfc1123Format.setTimeZone(TimeZone.getTimeZone(serverTimeZone));
+            rfc1123Format.setTimeZone(TimeZone.getTimeZone("GMT"));
             assertEquals("the date: " + rfc1123Format.format(d), getMethod
                 .getResponseBodyAsString());
-            rfc1123Format.setTimeZone(TimeZone.getDefault());
-
             rfc1123Format.setTimeZone(TimeZone.getTimeZone("GMT"));
             assertEquals(rfc1123Format.format(d), getMethod.getResponseHeader("Last-Modified")
                 .getValue());
@@ -292,11 +287,9 @@ public class RequestMethodsTest extends TestCase {
          * get the time zone for the server
          */
         GetMethod getMethod = new GetMethod(getBaseURI() + "/context/request/timezone");
-        String serverTimeZone = null;
         try {
             client.executeMethod(getMethod);
             assertEquals(200, getMethod.getStatusCode());
-            serverTimeZone = getMethod.getResponseBodyAsString();
         } finally {
             getMethod.releaseConnection();
         }
@@ -304,8 +297,9 @@ public class RequestMethodsTest extends TestCase {
         PutMethod putMethod = new PutMethod(getBaseURI() + "/context/request/date");
         Date d2 = new Date(System.currentTimeMillis() - 120000);
         Date d = new Date(System.currentTimeMillis() - 60000);
-        DateFormat dateFormat = DateFormat.getDateTimeInstance();
-        dateFormat.setTimeZone(TimeZone.getTimeZone(serverTimeZone));
+        DateFormat dateFormat = new SimpleDateFormat(
+                                                     "EEE, dd MMM yyyy HH:mm:ss zzz",
+                                                     Locale.ENGLISH); // DateFormat.getDateTimeInstance();
         String date = dateFormat.format(d);
         putMethod.setRequestEntity(new StringRequestEntity(date, "text/string", "UTF-8"));
         try {
@@ -329,7 +323,7 @@ public class RequestMethodsTest extends TestCase {
              */
             client.executeMethod(getMethod);
             assertEquals(200, getMethod.getStatusCode());
-            rfc1123Format.setTimeZone(TimeZone.getTimeZone(serverTimeZone));
+            rfc1123Format.setTimeZone(TimeZone.getTimeZone("GMT"));
             assertEquals("the date: " + rfc1123Format.format(d), getMethod
                 .getResponseBodyAsString());
             rfc1123Format.setTimeZone(TimeZone.getDefault());
@@ -351,11 +345,9 @@ public class RequestMethodsTest extends TestCase {
              */
             client.executeMethod(getMethod);
             assertEquals(200, getMethod.getStatusCode());
-            rfc1123Format.setTimeZone(TimeZone.getTimeZone(serverTimeZone));
+            rfc1123Format.setTimeZone(TimeZone.getTimeZone("GMT"));
             assertEquals("the date: " + rfc1123Format.format(d), getMethod
                 .getResponseBodyAsString());
-            rfc1123Format.setTimeZone(TimeZone.getDefault());
-
             rfc1123Format.setTimeZone(TimeZone.getTimeZone("GMT"));
             assertEquals(rfc1123Format.format(d), getMethod.getResponseHeader("Last-Modified")
                 .getValue());
@@ -376,7 +368,7 @@ public class RequestMethodsTest extends TestCase {
              */
             client.executeMethod(getMethod);
             assertEquals(200, getMethod.getStatusCode());
-            rfc1123Format.setTimeZone(TimeZone.getTimeZone(serverTimeZone));
+            rfc1123Format.setTimeZone(TimeZone.getTimeZone("GMT"));
             assertEquals("the date: " + rfc1123Format.format(d), getMethod
                 .getResponseBodyAsString());
             rfc1123Format.setTimeZone(TimeZone.getDefault());
@@ -415,7 +407,7 @@ public class RequestMethodsTest extends TestCase {
              */
             client.executeMethod(getMethod);
             assertEquals(200, getMethod.getStatusCode());
-            rfc1123Format.setTimeZone(TimeZone.getTimeZone(serverTimeZone));
+            rfc1123Format.setTimeZone(TimeZone.getTimeZone("GMT"));
             assertEquals("the date: " + rfc1123Format.format(d), getMethod
                 .getResponseBodyAsString());
             rfc1123Format.setTimeZone(TimeZone.getDefault());
