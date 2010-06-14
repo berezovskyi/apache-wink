@@ -154,7 +154,7 @@ public class LargeEntityTest extends TestCase {
         try {
             System.out
                 .println(new File(
-                                  ServerEnvironmentInfo.getWorkDir() + "/wink-itest-targeting-1.1-incubating-SNAPSHOT.war")
+                                  ServerEnvironmentInfo.getWorkDir() + "/wink-itest-targeting-1.1.1-incubating.war")
                     .getAbsoluteFile().getAbsolutePath());
             postMethod.setRequestEntity(new FileRequestEntity(new File(ServerEnvironmentInfo
                 .getWorkDir() + "/wink-itest-targeting-1.1.1-incubating.war"),
@@ -179,7 +179,7 @@ public class LargeEntityTest extends TestCase {
         try {
             System.out
                 .println(new File(
-                                  ServerEnvironmentInfo.getWorkDir() + "/wink-itest-targeting-1.1-incubating-SNAPSHOT.war")
+                                  ServerEnvironmentInfo.getWorkDir() + "/wink-itest-targeting-1.1.1-incubating.war")
                     .getAbsoluteFile().getAbsolutePath());
             postMethod.setRequestEntity(new FileRequestEntity(new File(ServerEnvironmentInfo
                 .getWorkDir() + "/wink-itest-targeting-1.1.1-incubating.war"),
