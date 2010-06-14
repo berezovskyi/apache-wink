@@ -20,7 +20,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.apache.wink</groupId>
     <artifactId>wink</artifactId>
-    <version>1.1-incubating</version>
+    <version>1.1.1-incubating-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>Apache Wink</name>
     <parent>
@@ -49,9 +49,9 @@
         <module>wink-assembly</module>
     </modules>
     <scm>
-        <connection>scm:svn:http://svn.apache.org/repos/asf/incubator/wink/branches/wink-1.1-incubating</connection>
-        <developerConnection>scm:svn:https://svn.apache.org/repos/asf/incubator/wink/branches/wink-1.1-incubating</developerConnection>
-        <url>http://svn.apache.org/viewvc/incubator/wink/branches/wink-1.1-incubating</url>
+        <connection>scm:svn:http://svn.apache.org/repos/asf/incubator/wink/trunk</connection>
+        <developerConnection>scm:svn:https://svn.apache.org/repos/asf/incubator/wink/trunk</developerConnection>
+        <url>http://svn.apache.org/viewvc/incubator/wink/trunk</url>
     </scm>
     <build>
         <plugins>
@@ -273,6 +273,7 @@
                         <preparationGoals>clean install</preparationGoals>
                         <autoVersionSubmodules>true</autoVersionSubmodules>
                     </configuration>
+                    <version>2.0</version>
                 </plugin>
 
                 <!-- Add manifest configuration since it is not defined in apache pom-->
@@ -451,6 +452,7 @@
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-jdk14</artifactId>
                 <version>1.5.11</version>
+                <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>org.slf4j</groupId>
@@ -603,7 +605,7 @@
             </modules>
         </profile>
         <profile>
-            <!-- users can specify -Dlogfile=/full/path/to/logging.properties to turn on
+            <!-- users can specify -Djava.util.logging.config.file=/full/path/to/logging.properties to turn on
                  logging for any given maven build in any project.  There is a default
                  logging.properties in wink-component-test-support/src/main/resources. -->
             <id>Log</id>
